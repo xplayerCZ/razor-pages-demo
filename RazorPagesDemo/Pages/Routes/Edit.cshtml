@@ -1,0 +1,45 @@
+﻿@page
+@model RazorPagesDemo.Pages.Routes.EditModel
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Edit</h1>
+
+<h4>Route</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Route.RouteID" />
+            <div class="form-group">
+                <label asp-for="Route.Type" class="control-label"></label>
+                <input asp-for="Route.Type" class="form-control" />
+                <span asp-validation-for="Route.Type" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Route.Owner" class="control-label"></label>
+                <input asp-for="Route.Owner" class="form-control" />
+                <span asp-validation-for="Route.Owner" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Route.Length" class="control-label"></label>
+                <input asp-for="Route.Length" class="form-control" />
+                <span asp-validation-for="Route.Length" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-page="./Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

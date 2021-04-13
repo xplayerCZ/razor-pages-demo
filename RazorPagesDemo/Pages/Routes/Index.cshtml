@@ -1,0 +1,48 @@
+﻿@page
+@model RazorPagesDemo.Pages.Routes.IndexModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-page="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Route[0].Type)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Route[0].Owner)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Route[0].Length)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.Route) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Type)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Owner)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Length)
+            </td>
+            <td>
+                <a asp-page="./Edit" asp-route-id="@item.RouteID">Edit</a> |
+                <a asp-page="./Details" asp-route-id="@item.RouteID">Details</a> |
+                <a asp-page="./Delete" asp-route-id="@item.RouteID">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

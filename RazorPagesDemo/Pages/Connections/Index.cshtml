@@ -1,0 +1,60 @@
+﻿@page
+@model RazorPagesDemo.Pages.Connections.IndexModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-page="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Connection[0].Start)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Connection[0].CarriesBikes)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Connection[0].IsLowRise)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Connection[0].Carrier)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Connection[0].Route)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.Connection) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Start)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CarriesBikes)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IsLowRise)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Carrier.CarrierID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Route.RouteID)
+            </td>
+            <td>
+                <a asp-page="./Edit" asp-route-id="@item.ConnectionID">Edit</a> |
+                <a asp-page="./Details" asp-route-id="@item.ConnectionID">Details</a> |
+                <a asp-page="./Delete" asp-route-id="@item.ConnectionID">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
