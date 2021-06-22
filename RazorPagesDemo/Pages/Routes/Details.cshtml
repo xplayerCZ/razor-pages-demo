@@ -32,6 +32,9 @@
     </dl>
 </div>
 <div>
-    <a asp-page="./Edit" asp-route-id="@Model.Route.RouteID">Edit</a> |
+    @if (User.Identity.IsAuthenticated)
+    {
+        <a asp-page="./Edit" asp-route-id="@Model.Route.RouteID">Edit</a> @("|")
+    }
     <a asp-page="./Index">Back to List</a>
 </div>

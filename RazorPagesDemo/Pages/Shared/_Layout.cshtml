@@ -29,6 +29,17 @@
                         </li>
                     </ul>
                 </div>
+                <div>
+                    @if (!User.Identity.IsAuthenticated)
+                    {
+                        <a asp-area="Identity" asp-page="/Account/Login">Login</a>
+                    }
+                    else
+                    {
+                        @("User:") <a asp-area="Identity" asp-page="/Account/Manage/Index">@User.Identity.Name</a> 
+                        <a asp-area="Identity" asp-page="/Account/Logout">Logout</a>
+                    }
+                </div>
             </div>
         </nav>
     </header>

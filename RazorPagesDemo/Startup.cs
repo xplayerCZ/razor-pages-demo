@@ -30,19 +30,20 @@ namespace RazorPagesDemo
 
             services.AddRazorPages(options =>
             {
-                options.Conventions.AuthorizeFolder("/Administration", "RequireAdministratorRole");
-                options.Conventions.AllowAnonymousToFolder("/Administration/Identity");
+                options.Conventions.AuthorizeFolder("/Carriers")
+                    .AllowAnonymousToPage("/Carriers/Index")
+                    .AllowAnonymousToPage("/Carriers/Details");
 
-                options.Conventions.AuthorizePage("/Clenove/Board", "RequireMembership");
+                options.Conventions.AuthorizeFolder("/Connections")
+                    .AllowAnonymousToPage("/Connections/Index")
+                    .AllowAnonymousToPage("/Connections/Details");
+
+                options.Conventions.AuthorizeFolder("/Routes")
+                    .AllowAnonymousToPage("/Routes/Index")
+                    .AllowAnonymousToPage("/Routes/Details");
             });
 
-            services.AddAuthorization(options =>
-            {
-                options.AddPolicy("RequireAdministratorRole",
-                     policy => policy.RequireRole("Administrator"));
-                options.AddPolicy("RequireMembership",
-                     policy => policy.RequireRole("Member"));
-            });
+            services.AddAuthorization();
 
             services.AddDbContext<DemoContext>(options =>
                     options.UseSqlite("Data Source = Demo.db"));

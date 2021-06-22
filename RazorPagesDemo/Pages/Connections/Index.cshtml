@@ -7,9 +7,12 @@
 
 <h1>Index</h1>
 
-<p>
-    <a asp-page="Create">Create New</a>
-</p>
+@if (User.Identity.IsAuthenticated)
+{
+    <p>
+        <a asp-page="Create">Create New</a>
+    </p>
+}
 <table class="table">
     <thead>
         <tr>
@@ -32,29 +35,36 @@
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model.Connection) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Start)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CarriesBikes)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.IsLowRise)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Carrier.CarrierID)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Route.RouteID)
-            </td>
-            <td>
-                <a asp-page="./Edit" asp-route-id="@item.ConnectionID">Edit</a> |
-                <a asp-page="./Details" asp-route-id="@item.ConnectionID">Details</a> |
-                <a asp-page="./Delete" asp-route-id="@item.ConnectionID">Delete</a>
-            </td>
-        </tr>
-}
+        @foreach (var item in Model.Connection)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Start)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CarriesBikes)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IsLowRise)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Carrier.CarrierID)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Route.RouteID)
+                </td>
+                <td>
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        <a asp-page="./Edit" asp-route-id="@item.ConnectionID">Edit</a> @("|")
+                    }
+                    <a asp-page="./Details" asp-route-id="@item.ConnectionID">Details</a>
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        @("|") <a asp-page="./Delete" asp-route-id="@item.ConnectionID">Delete</a>
+                    }
+                </td>
+            </tr>
+        }
     </tbody>
 </table>

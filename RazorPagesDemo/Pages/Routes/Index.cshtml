@@ -7,9 +7,12 @@
 
 <h1>Index</h1>
 
-<p>
-    <a asp-page="Create">Create New</a>
-</p>
+@if (User.Identity.IsAuthenticated)
+{
+    <p>
+        <a asp-page="Create">Create New</a>
+    </p>
+}
 <table class="table">
     <thead>
         <tr>
@@ -26,23 +29,30 @@
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model.Route) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Type)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Owner)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Length)
-            </td>
-            <td>
-                <a asp-page="./Edit" asp-route-id="@item.RouteID">Edit</a> |
-                <a asp-page="./Details" asp-route-id="@item.RouteID">Details</a> |
-                <a asp-page="./Delete" asp-route-id="@item.RouteID">Delete</a>
-            </td>
-        </tr>
-}
+        @foreach (var item in Model.Route)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Type)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Owner)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Length)
+                </td>
+                <td>
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        <a asp-page="./Edit" asp-route-id="@item.RouteID">Edit</a> @("|")
+                    }
+                    <a asp-page="./Details" asp-route-id="@item.RouteID">Details</a>
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        @("|") <a asp-page="./Delete" asp-route-id="@item.RouteID">Delete</a>
+                    }
+                </td>
+            </tr>
+        }
     </tbody>
 </table>
